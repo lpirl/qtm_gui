@@ -1,0 +1,24 @@
+html, body, #map {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.olControlAttribution {
+	bottom: 1px !important;
+	font-size: 0.75em !important;
+}
+
+#builder {
+	position: absolute;
+	bottom: 1em;
+	left: 1em;
+	z-index: 20000;
+	background-color: rgba(255, 255, 255, 0.75);
+	border: 1px solid black;
+	padding: 0.5em 1em;
+}
+
+#builder ol {
+	margin: 0px;
+}
