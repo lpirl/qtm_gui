@@ -23,15 +23,91 @@
 <body>
 	<div id="map"></div>
 
-	<div id="builder">
+	<div id="builder"><form>
+
 		This interface helps you to build queries for
 		<a target="_blank" href="http://wiki.openstreetmap.org/wiki/Query-to-map">Query-to-map</a>
+
 		<ol>
-			<li>step a</li>
-			<li>step b</li>
-			<li>…</li>
+
+			<li>zoom and pan to the region you want to search in</li>
+
+			<li>results either
+
+				<input	id="results_map"
+						type="radio"
+						name="results"
+						value="map"
+						checked="checked">
+				<label for="results_map">on a map</label>
+
+				or
+
+				<input	id="results_list"
+						type="radio"
+						name="results"
+						value="list">
+				<label for="results_list">as a list</label>
+
+			</li>
+
+			<li>
+				search
+				<input	id="types_points"
+						type="checkbox"
+						name="types"
+						value="points"
+						checked="checked">
+				<label for="types_points">points</label>
+
+				<input	id="types_lines"
+						type="checkbox"
+						name="types"
+						value="lines"
+						checked="checked">
+				<label for="types_lines">lines</label>
+
+				<input	id="types_areas"
+						type="checkbox"
+						name="types"
+						value="areas"
+						checked="checked">
+				<label for="types_areas">areas</label>
+
+			</li>
+
+			<li>
+				display
+				<input	id="types_infos"
+						type="checkbox"
+						name="types"
+						value="infos"
+						checked="checked">
+				<label for="types_infos">info-ballons</label>
+			</li>
+
+			<li>
+				search
+				<label for="search_name">name</label>
+				<input	id="search_name"
+						type="text"
+						name="search_name">
+
+				<label for="search_key">tag key</label>
+				<input	id="search_key"
+						type="text"
+						name="search_key">
+
+				<label for="search_value">tag value</label>
+				<input	id="search_value"
+						type="text"
+						name="search_value">
+
+			</li>
+
 		</ol>
-	</div>
+
+	</form></div>
 
 </body>
 

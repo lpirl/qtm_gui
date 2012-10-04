@@ -22,3 +22,25 @@ html, body, #map {
 #builder ol {
 	margin: 0px;
 }
+
+#builder label  {
+	margin-left: 1em;
+}
+
+#builder input[type="text"] {
+	margin-right: 1em;
+	border: 1px dotted black;
+	background-color: inherit;
+}
+
+#builder input[type="checkbox"],
+#builder input[type="radio"]  {
+	margin: 0 0 0.1em 1em;
+	vertical-align: middle;
+}
+
+#builder input[type="checkbox"] + label,
+#builder input[type="radio"] + label {
+	margin-right: 1em;
+	margin-left: 0px;
+}
