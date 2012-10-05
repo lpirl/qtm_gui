@@ -59,16 +59,26 @@ function build_qtm_url(script, bbox, name, key, value, types){
 	].join('');
 }
 
+function sanitive_inputs(){
+	$('input[name="search_name"]').each(function(){
+		if( ! $(this).val() ) {
+			console.log("should_update");
+			$(this).val('*');
+		}
+	});
+}
+
 function initialize_url_generation(map){
 	var	source_projection = new OpenLayers.Projection("EPSG:900913"),
 		target_projection = new OpenLayers.Projection("EPSG:4326");
 	$('input').on('change', function(){
+		sanitive_inputs();
 		var	bbox =	map.getExtent(
 					).transform(
 						source_projection,
 						target_projection
 					).toBBOX(
-					)
+					),
 			url = build_qtm_url(
 			$('input[name="script_to_query"]').val(),	// script
 			bbox,										// bbox
@@ -91,5 +101,5 @@ $(document).ready(function(){
 	var map = initialize_map();
 	initialize_url_generation(map);
 	initialize_select_text_on_focus();
-	initialize_open_map_on_submit();
+	//TODO: initialize_open_map_on_submit();
 });
