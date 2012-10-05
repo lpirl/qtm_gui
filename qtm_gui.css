@@ -44,3 +44,26 @@ html, body, #map {
 	margin-right: 1em;
 	margin-left: 0px;
 }
+
+span.red {
+	color: red;
+}
+
+#link{
+	display: none;
+}
+
+span.strong,
+span.strong a {
+	font-weight: bolder;
+	color: black;
+}
+
+span.light1 {
+	color: rgba(0, 0, 0, 0.7);
+}
+
+span.light2,
+span.light2 a {
+	color: rgba(0, 0, 0, 0.4);
+}

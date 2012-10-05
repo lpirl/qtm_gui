@@ -25,19 +25,36 @@
 
 	<div id="builder"><form>
 
-		This interface helps you to build queries for
-		<a target="_blank" href="http://wiki.openstreetmap.org/wiki/qtm">qtm</a>
-
+		<span class="strong">
+			build queries for
+			<a	target="_blank"
+				href="http://wiki.openstreetmap.org/wiki/Query-to-map">
+				qtm
+			</a>
+		</span>
+		<span class="light1">
+			| for advanced OSM users
+		</span>
+		<span class="light2">
+			| for keys/values, see
+			<a	target="_blank"
+				href="http://wiki.openstreetmap.org/wiki/Map_Features">
+				Map Features
+			</a>
+		</span>
 		<ol>
 
-			<li>zoom and pan to the region you want to search in</li>
+			<li>
+				zoom and pan to the region you want to search in
+				(be nice - <span class="red">as small as possible</span>)
+			</li>
 
 			<li>results either
 
 				<input	id="results_map"
 						type="radio"
-						name="results"
-						value="map"
+						name="script_to_query"
+						value="queryinmap"
 						checked="checked">
 				<label for="results_map">on a map</label>
 
@@ -45,8 +62,8 @@
 
 				<input	id="results_list"
 						type="radio"
-						name="results"
-						value="list">
+						name="script_to_query"
+						value="featurelist">
 				<label for="results_list">as a list</label>
 
 			</li>
@@ -83,7 +100,7 @@
 						name="types"
 						value="infos"
 						checked="checked">
-				<label for="types_infos">info-ballons</label>
+				<label for="types_infos">info-balloons (on click)</label>
 			</li>
 
 			<li>
@@ -91,6 +108,7 @@
 				<label for="search_name">name</label>
 				<input	id="search_name"
 						type="text"
+						value="*"
 						name="search_name">
 
 				<label for="search_key">tag key</label>
@@ -103,6 +121,12 @@
 						type="text"
 						name="search_value">
 
+			</li>
+
+			<li id="link">
+				<a	href="javascript:void(0)" target="qtm_result">
+					view map
+				</a>
 			</li>
 
 		</ol>
