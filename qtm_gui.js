@@ -71,7 +71,7 @@ function sanitive_inputs(){
 function initialize_url_generation(map){
 	var	source_projection = new OpenLayers.Projection("EPSG:900913"),
 		target_projection = new OpenLayers.Projection("EPSG:4326");
-	$('input').on('change', function(){
+	$('#link a').on('click', function(){
 		sanitive_inputs();
 		var	bbox =	map.getExtent(
 					).transform(
@@ -80,13 +80,13 @@ function initialize_url_generation(map){
 					).toBBOX(
 					),
 			url = build_qtm_url(
-			$('input[name="script_to_query"]:checked').val(),	// script
-			bbox,												// bbox
-			$('input[name="search_name"]').val(),				// name
-			$('input[name="search_key"]').val(),				// key
-			$('input[name="search_value"]').val(),				// value
-			retrieve_checkbox_values('types')
-		);
+				$('input[name="script_to_query"]:checked').val(),	// script
+				bbox,												// bbox
+				$('input[name="search_name"]').val(),				// name
+				$('input[name="search_key"]').val(),				// key
+				$('input[name="search_value"]').val(),				// value
+				retrieve_checkbox_values('types')
+			);
 		if( url ) $('#link').show('slow').find('a').attr('href', url);
 	});
 }

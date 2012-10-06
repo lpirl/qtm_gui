@@ -49,10 +49,6 @@ span.red {
 	color: red;
 }
 
-#link{
-	display: none;
-}
-
 span.strong,
 span.strong a {
 	font-weight: bolder;
