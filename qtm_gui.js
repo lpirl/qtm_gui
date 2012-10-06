@@ -49,11 +49,11 @@ function build_qtm_url(script, bbox, name, key, value, types){
 		script, '.php?',
 		'BBOX=', bbox,
 		'&',
-		'name=', name,
+		'name=', (script=='queryinmap' ? name : ''),
 		'&',
 		'key=', key,
 		'&',
-		'value=', value,
+		'value=', (key ? value : ''),
 		'&',
 		'types=', types.join('-'),
 	].join('');
@@ -97,9 +97,24 @@ function initialize_select_text_on_focus(){
 	});
 }
 
+function initialize_adapt_form_to_script(){
+	$('input[name="script_to_query"]').on('change', function(){
+		var	name_input = $(
+				'input[name="search_name"]'
+			).add(
+				'label[for="search_name"]'
+			);
+		if( $(this).filter(':checked').val() == 'featurelist' )
+			name_input.animate({opacity: 0}, 'slow')
+		else
+			name_input.animate({opacity: 1}, 'slow')
+	});
+}
+
 $(document).ready(function(){
 	var map = initialize_map();
 	initialize_url_generation(map);
 	initialize_select_text_on_focus();
+	initialize_adapt_form_to_script();
 	//TODO: initialize_open_map_on_submit();
 });
