@@ -59,7 +59,8 @@ span.strong a {
 	color: black;
 }
 
-span.light1 {
+span.light1,
+span.light1 a {
 	color: rgba(0, 0, 0, 0.7);
 }
 

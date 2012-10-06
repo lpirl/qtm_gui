@@ -80,11 +80,11 @@ function initialize_url_generation(map){
 					).toBBOX(
 					),
 			url = build_qtm_url(
-			$('input[name="script_to_query"]').val(),	// script
-			bbox,										// bbox
-			$('input[name="search_name"]').val(),		// name
-			$('input[name="search_key"]').val(),		// key
-			$('input[name="search_value"]').val(),		// value
+			$('input[name="script_to_query"]:checked').val(),	// script
+			bbox,												// bbox
+			$('input[name="search_name"]').val(),				// name
+			$('input[name="search_key"]').val(),				// key
+			$('input[name="search_value"]').val(),				// value
 			retrieve_checkbox_values('types')
 		);
 		if( url ) $('#link').show('slow').find('a').attr('href', url);
