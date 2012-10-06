@@ -99,15 +99,11 @@ function initialize_select_text_on_focus(){
 
 function initialize_adapt_form_to_script(){
 	$('input[name="script_to_query"]').on('change', function(){
-		var	name_input = $(
-				'input[name="search_name"]'
-			).add(
-				'label[for="search_name"]'
-			);
-		if( $(this).filter(':checked').val() == 'featurelist' )
-			name_input.animate({opacity: 0}, 'slow')
-		else
-			name_input.animate({opacity: 1}, 'slow')
+		var	name_input = input_and_label("search_name");
+		name_input.fadeTo(
+			'slow',
+			Number( $(this).filter(':checked').val() != 'featurelist' )
+		);
 	});
 }
 
@@ -120,10 +116,28 @@ function initialize_open_map_on_submit(){
 	});
 }
 
+function input_and_label(name){
+	return $(
+		'input[name="' + name + '"]'
+	).add(
+		'label[for="' + name + '"]'
+	);
+}
+
+function initialize_adapt_form_to_key(){
+	$('input[name="search_key"]').on('keyup', function(e){
+		input_and_label("search_value").fadeTo(
+			'slow',
+			Number( $(e.target).val() != '' )
+		);
+	});
+}
+
 $(document).ready(function(){
 	var map = initialize_map();
 	initialize_url_generation(map);
 	initialize_select_text_on_focus();
 	initialize_adapt_form_to_script();
+	initialize_adapt_form_to_key();
 	initialize_open_map_on_submit();
 });
