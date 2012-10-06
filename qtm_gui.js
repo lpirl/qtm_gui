@@ -111,10 +111,19 @@ function initialize_adapt_form_to_script(){
 	});
 }
 
+function initialize_open_map_on_submit(){
+	$('input').on('keypress', function(e){
+		if( e.which == 13 ) {
+			$('#link a')[0].click();
+			e.preventDefault();
+		}
+	});
+}
+
 $(document).ready(function(){
 	var map = initialize_map();
 	initialize_url_generation(map);
 	initialize_select_text_on_focus();
 	initialize_adapt_form_to_script();
-	//TODO: initialize_open_map_on_submit();
+	initialize_open_map_on_submit();
 });
