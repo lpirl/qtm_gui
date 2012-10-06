@@ -104,7 +104,7 @@ function initialize_adapt_form_to_script(){
 			'slow',
 			Number( $(this).filter(':checked').val() != 'featurelist' )
 		);
-	});
+	}).trigger('change');
 }
 
 function initialize_open_map_on_submit(){
@@ -130,7 +130,7 @@ function initialize_adapt_form_to_key(){
 			'slow',
 			Number( $(e.target).val() != '' )
 		);
-	});
+	}).trigger('keyup');
 }
 
 $(document).ready(function(){
