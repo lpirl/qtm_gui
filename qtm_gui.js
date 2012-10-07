@@ -29,15 +29,14 @@ function initialize_map(){
 }
 
 function retrieve_checkbox_values(name){
-	var values = [];
-	$(
-		'input[type="checkbox"]:checked'
-	).filter(
-		'[name="' + name + '"]'
-	).each(function(){
-		values.push($(this).val());
-	});
-	return values;
+	return	$(
+				'input[type="checkbox"]:checked'
+			).filter(
+				'[name="' + name + '"]'
+			).map(
+				function(){return $(this).val()}
+			).get(
+			);
 }
 
 function build_qtm_url(script, bbox, name, key, value, types){
@@ -59,10 +58,9 @@ function build_qtm_url(script, bbox, name, key, value, types){
 	].join('');
 }
 
-function sanitive_inputs(){
+function sanitize_inputs(){
 	$('input[name="search_name"]').each(function(){
 		if( ! $(this).val() ) {
-			console.log("should_update");
 			$(this).val('*');
 		}
 	});
@@ -72,7 +70,7 @@ function initialize_url_generation(map){
 	var	source_projection = new OpenLayers.Projection("EPSG:900913"),
 		target_projection = new OpenLayers.Projection("EPSG:4326");
 	$('#link a').on('click', function(){
-		sanitive_inputs();
+		sanitize_inputs();
 		var	bbox =	map.getExtent(
 					).transform(
 						source_projection,
