@@ -154,10 +154,47 @@ function initialize_toggle_popup() {
 	});
 }
 
+function request_for_taginfo(request){
+	request.sortname = 'count_all';
+	request.sortorder = 'desc';
+	request.rp = '10';
+	request.page = '1';
+	if( request.term ) request.query = request.term
+	return request
+}
+
+function taginfo_json_to_results(json){
+	return 	$(
+				json.data
+			).map(
+				function(){return this.key}
+			).get(
+			).reverse(
+			);
+}
+
+function initialize_key_autocomplete(){
+	$('input[name="search_key"]').autocomplete({
+		minLength: 1,
+		position: {my: "left bottom", at: "left top",},
+		source: function(request, response ) {
+			$.getJSON(
+				"http://taginfo.openstreetmap.org/api/2/db/keys?callback=?",
+				request_for_taginfo(request),
+				function(json) {
+					response(taginfo_json_to_results(json));
+				}
+			);
+		}
+	});
+}
+
 $(document).ready(function(){
-	// next line fixes bug w/ chromium
+
+	// fixes bug w/ popups in chromium
 	// see http://lists.osgeo.org/pipermail/openlayers-users//2012-January/023757.html
 	$('#map').css({width: '100%', height: '100%'});
+
 	var map = initialize_map();
 	initialize_url_generation(map);
 	initialize_select_text_on_focus();
@@ -165,4 +202,5 @@ $(document).ready(function(){
 	initialize_adapt_form_to_key();
 	initialize_open_map_on_submit();
 	initialize_toggle_popup();
+	initialize_key_autocomplete();
 });
