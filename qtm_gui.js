@@ -49,11 +49,11 @@ function build_qtm_url(script, bbox, name, key, value, types){
 		script, '.php?',
 		'BBOX=', bbox,
 		'&',
-		'name=', (script=='queryinmap' ? name : ''),
+		'name=', (script=='queryinmap' ? encodeURIComponent(name) : ''),
 		'&',
-		'key=', key,
+		'key=', encodeURIComponent(key),
 		'&',
-		'value=', (key ? value : ''),
+		'value=', (key ? encodeURIComponent(value) : ''),
 		'&',
 		'types=', types.join('-'),
 	].join('');
@@ -133,11 +133,36 @@ function initialize_adapt_form_to_key(){
 	}).trigger('keyup');
 }
 
+function initialize_toggle_popup() {
+	$('a.toggle_popup').on('click', function(e){
+		$(e.target).closest('a').attr('href', document.URL);
+		if( !window.is_popup ){
+			var new_window = window.open(
+				document.URL,
+				document.title,
+				'height=500,width=900'
+			);
+			if (window.focus) {new_window.focus()}
+			new_window.is_popup = true;
+			e.preventDefault();
+		}
+
+		// next line fixes strange behavior of chromium
+		// see http://productforums.google.com/forum/#!topic/chrome/GjsCrvPYGlA
+		window.open('','_self');
+		window.close();
+	});
+}
+
 $(document).ready(function(){
+	// next line fixes bug w/ chromium
+	// see http://lists.osgeo.org/pipermail/openlayers-users//2012-January/023757.html
+	$('#map').css({width: '100%', height: '100%'});
 	var map = initialize_map();
 	initialize_url_generation(map);
 	initialize_select_text_on_focus();
 	initialize_adapt_form_to_script();
 	initialize_adapt_form_to_key();
 	initialize_open_map_on_submit();
+	initialize_toggle_popup();
 });

@@ -64,3 +64,10 @@ span.light2,
 span.light2 a {
 	color: rgba(0, 0, 0, 0.4);
 }
+
+#popup_link {
+	position: absolute;
+	top: 3px;
+	right: 3px;
+	display: inline-block;
+}
