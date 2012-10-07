@@ -126,9 +126,12 @@ function input_and_label(name){
 
 function initialize_adapt_form_to_key(){
 	$('input[name="search_key"]').on('keyup', function(e){
-		input_and_label("search_value").fadeTo(
+		input_and_label(
+			"search_value"
+		).fadeTo(
 			'slow',
-			Number( $(e.target).val() != '' )
+			Number( $(e.target).val() != '' ),
+			function(){$(this).not(':visible').blur()}
 		);
 	}).trigger('keyup');
 }
@@ -154,20 +157,25 @@ function initialize_toggle_popup() {
 	});
 }
 
-function request_for_taginfo(request){
+function request_for_taginfo(request, include_key){
+	if( typeof include_key == 'undefined' ) include_key = false;
+
 	request.sortname = 'count_all';
 	request.sortorder = 'desc';
 	request.rp = '10';
 	request.page = '1';
-	if( request.term ) request.query = request.term
+	if( request.term ) request.query = request.term;
+
+	if( include_key ) request.key = $('input[name="search_key"]').val();
+
 	return request
 }
 
-function taginfo_json_to_results(json){
+function taginfo_json_to_results(json, property_name){
 	return 	$(
 				json.data
 			).map(
-				function(){return this.key}
+				function(){return this[property_name]}
 			).get(
 			).reverse(
 			);
@@ -182,7 +190,23 @@ function initialize_key_autocomplete(){
 				"http://taginfo.openstreetmap.org/api/2/db/keys?callback=?",
 				request_for_taginfo(request),
 				function(json) {
-					response(taginfo_json_to_results(json));
+					response(taginfo_json_to_results(json, 'key'));
+				}
+			);
+		}
+	});
+}
+
+function initialize_value_autocomplete(){
+	$('input[name="search_value"]').autocomplete({
+		minLength: 1,
+		position: {my: "left bottom", at: "left top",},
+		source: function(request, response ) {
+			$.getJSON(
+				"http://taginfo.openstreetmap.org/api/2/db/keys/values?callback=?",
+				request_for_taginfo(request, true),
+				function(json) {
+					response(taginfo_json_to_results(json, 'value'));
 				}
 			);
 		}
@@ -203,4 +227,5 @@ $(document).ready(function(){
 	initialize_open_map_on_submit();
 	initialize_toggle_popup();
 	initialize_key_autocomplete();
+	initialize_value_autocomplete();
 });
