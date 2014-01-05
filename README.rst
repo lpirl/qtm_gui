@@ -3,4 +3,4 @@
 `Query-to-map <http://wiki.openstreetmap.org/wiki/Query-to-map>`_,
 built with HTML/JavaScript.
 
-Demo available `here <http://vs.lukas-pirl.de/qtm_gui/index.html>`_.
+Demo available `here <http://utils.lukas-pirl.de/qtm_gui/>`_.
