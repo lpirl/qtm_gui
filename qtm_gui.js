@@ -170,7 +170,7 @@ function request_for_taginfo(request, include_key){
 }
 
 function taginfo_json_to_results(json, property_name){
-	return 	$(
+	return	$(
 				json.data
 			).map(
 				function(){return this[property_name]}
@@ -179,13 +179,17 @@ function taginfo_json_to_results(json, property_name){
 			);
 }
 
+function taginfo_request_url(path) {
+	return "http://taginfo.openstreetmap.org/api/4/" + path + "?callback=?";
+}
+
 function initialize_key_autocomplete(){
 	$('input[name="search_key"]').autocomplete({
 		minLength: 1,
 		position: {my: "left bottom", at: "left top",},
 		source: function(request, response ) {
 			$.getJSON(
-				"http://taginfo.openstreetmap.org/api/2/db/keys?callback=?",
+				taginfo_request_url("keys/all"),
 				request_for_taginfo(request),
 				function(json) {
 					response(taginfo_json_to_results(json, 'key'));
@@ -201,7 +205,7 @@ function initialize_value_autocomplete(){
 		position: {my: "left bottom", at: "left top",},
 		source: function(request, response ) {
 			$.getJSON(
-				"http://taginfo.openstreetmap.org/api/2/db/keys/values?callback=?",
+				taginfo_request_url("key/values"),
 				request_for_taginfo(request, true),
 				function(json) {
 					response(taginfo_json_to_results(json, 'value'));
