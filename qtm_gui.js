@@ -1,8 +1,8 @@
 function initialize_map(){
 	var urls = [
-		"http://a.tile.openstreetmap.org/${z}/${x}/${y}.png",
-		"http://b.tile.openstreetmap.org/${z}/${x}/${y}.png",
-		"http://c.tile.openstreetmap.org/${z}/${x}/${y}.png"
+		"//a.tile.openstreetmap.org/${z}/${x}/${y}.png",
+		"//b.tile.openstreetmap.org/${z}/${x}/${y}.png",
+		"//c.tile.openstreetmap.org/${z}/${x}/${y}.png"
 	];
 
 	var map = new OpenLayers.Map({
@@ -10,7 +10,7 @@ function initialize_map(){
 		layers: [
 			new OpenLayers.Layer.XYZ("OSM", urls, {
 				transitionEffect: "resize", buffer: 2, sphericalMercator: true,
-				attribution: "Data CC-By-SA by <a href='http://openstreetmap.org/'>OpenStreetMap</a>"
+				attribution: "Data CC-By-SA by <a href='//openstreetmap.org/'>OpenStreetMap</a>"
 			}),
 		],
 		controls: [
@@ -44,7 +44,7 @@ function build_qtm_url(script, bbox, name, key, value, types){
 	if( !bbox ) return;
 	if( !types ) return;
 	return [
-		'http://toolserver.org/~kolossos/qtm2/',
+		'//toolserver.org/~kolossos/qtm2/',
 		script, '.php?',
 		'BBOX=', bbox,
 		'&',
@@ -180,7 +180,7 @@ function taginfo_json_to_results(json, property_name){
 }
 
 function taginfo_request_url(path) {
-	return "http://taginfo.openstreetmap.org/api/4/" + path + "?callback=?";
+	return "//taginfo.openstreetmap.org/api/4/" + path + "?callback=?";
 }
 
 function initialize_key_autocomplete(){
